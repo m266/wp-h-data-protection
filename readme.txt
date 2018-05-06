@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.3
+1. Weitere Optionen f&uml;r Datenschutz-Seite eingebaut
+
 Version 1.2.2
 1. Aktivierungsfehler beseitigt
 
