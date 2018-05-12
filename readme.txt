@@ -15,11 +15,11 @@ Datenschutz-Plugin
 
 == Changelog ==
 Version 1.3.1
-1. Plugin-Text f&uml;r Option 1 wird nur angezeigt, wenn das jeweilige Plugin aktiv ist
+1. Plugin-Text fuer Option 1 wird nur angezeigt, wenn das jeweilige Plugin aktiv ist
 2. Untere Optionen werden nur bei aktivem SBR-Theme angezeigt
 
 Version 1.3
-1. Weitere Optionen f&uml;r Datenschutz-Seite eingebaut
+1. Weitere Optionen fuer Datenschutz-Seite eingebaut
 
 Version 1.2.2
 1. Aktivierungsfehler beseitigt
