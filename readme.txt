@@ -14,6 +14,10 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.3.1
+1. Plugin-Text f&uml;r Option 1 wird nur angezeigt, wenn das jeweilige Plugin aktiv ist
+2. Untere Optionen werden nur bei aktivem SBR-Theme angezeigt
+
 Version 1.3
 1. Weitere Optionen f&uml;r Datenschutz-Seite eingebaut
 

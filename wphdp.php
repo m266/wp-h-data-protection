@@ -5,8 +5,8 @@ Plugin URI:    https://github.com/m266/wp-h-data-protection
 Description:   Datenschutz f&uuml;r WordPress
 Author:        Hans M. Herbrand
 Author URI:    https://www.web266.de
-Version:       1.3
-Date:          2018-05-06
+Version:       1.3.1
+Date:          2018-05-12
 License:       GNU General Public License v2 or later
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -78,14 +78,18 @@ settings_fields('wp_h_data_protection_option_group');
             array($this, 'wp_h_data_protection_section_info'), // callback
             'wp-h-data-protection-admin' // page
         );
-        // Kommentare, Plugin Flamingo
-        $wphdp_flamingo = "Kommmentare";
+        // Kommentare, Plugins Flamingo, WP H-Guestbook
+        $wphdp_option_1 = "Kommmentare";
         if (is_plugin_active('flamingo/flamingo.php')) {
-            // Plugin Flamingo aktiv
-            $wphdp_flamingo = "Kommentare, Plugin Flamingo";
+            // Plugin Flamingo aktiv?
+            $wphdp_option_1_flamingo = "<br>- Flamingo";
+        }
+        if (is_plugin_active('wp-h-guestbook/wphgb.php')) {
+            // Plugin WP H-Guestbook aktiv?
+            $wphdp_option_1_guestbook = "<br>- WP H-Guestbook";
         }
         add_settings_field('checkbox_1_0', // id
-            $wphdp_flamingo, // title
+            'Kommmentare' . $wphdp_option_1_flamingo . $wphdp_option_1_guestbook, // title
             array($this, 'checkbox_1_0_callback'), // callback
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
@@ -117,6 +121,9 @@ settings_fields('wp_h_data_protection_option_group');
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
         );
+        // Nachfolgende Optionen nur bei SBR-Theme anzeigen
+        $wphdp_theme_sbr_activ = wp_get_theme(); // SBR-Theme aktiv?
+        if ( 'SBR' == $wphdp_theme_sbr_activ->name  ) {
         // Website-URL
         add_settings_field('checkbox_4_3', // id
             'Website-URL', // title
@@ -147,6 +154,7 @@ settings_fields('wp_h_data_protection_option_group');
                 'wp-h-data-protection-admin', // page
                 'wp_h_data_protection_setting_section' // section
             );
+        }
         }
     }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -194,16 +202,11 @@ settings_fields('wp_h_data_protection_option_group');
 //////////////////////////////////////////////////////////////////////////////////////////
     // Kommentare, Plugin Flamingo
     public function checkbox_1_0_callback() {
-        if (is_plugin_active('flamingo/flamingo.php')) {
-            // Plugin Flamingo aktiv
-            printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0]" id="checkbox_1_0" value="checkbox_1_0" %s> <label for="checkbox_1_0">Entfernt IP-Adressen aus Kommentaren und dem Plugin Flamingo</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0']) && $this->wp_h_data_protection_options['checkbox_1_0'] === 'checkbox_1_0') ? 'checked' : '');
-        } else {
-            printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0]" id="checkbox_1_0" value="checkbox_1_0" %s> <label for="checkbox_1_0">Entfernt IP-Adressen aus Kommentaren</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0']) && $this->wp_h_data_protection_options['checkbox_1_0'] === 'checkbox_1_0') ? 'checked' : '');
-        }
+            printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0]" id="checkbox_1_0" value="checkbox_1_0" %s> <label for="checkbox_1_0">Entfernt die IP-Adressen aus den Kommentaren und, wenn aktiviert, aus den genannten Plugins</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0']) && $this->wp_h_data_protection_options['checkbox_1_0'] === 'checkbox_1_0') ? 'checked' : '');
     }
     // Plugin WP Cerber
     public function checkbox_2_1_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_2_1]" id="checkbox_2_1" value="checkbox_2_1" %s> <label for="checkbox_2_1">Entfernt IP-Adressen aus dem Traffic Inspector</label>', (isset($this->wp_h_data_protection_options['checkbox_2_1']) && $this->wp_h_data_protection_options['checkbox_2_1'] === 'checkbox_2_1') ? 'checked' : '');
+        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_2_1]" id="checkbox_2_1" value="checkbox_2_1" %s> <label for="checkbox_2_1">Entfernt die IP-Adressen aus dem Traffic Inspector</label>', (isset($this->wp_h_data_protection_options['checkbox_2_1']) && $this->wp_h_data_protection_options['checkbox_2_1'] === 'checkbox_2_1') ? 'checked' : '');
     }
     // Plugin "MailPoet 2"
     public function checkbox_3_2_callback() {
