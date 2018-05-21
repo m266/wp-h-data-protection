@@ -5,8 +5,8 @@ Plugin URI:    https://github.com/m266/wp-h-data-protection
 Description:   Datenschutz f&uuml;r WordPress
 Author:        Hans M. Herbrand
 Author URI:    https://www.web266.de
-Version:       1.3.2
-Date:          2018-05-20
+Version:       1.3.3
+Date:          2018-05-21
 License:       GNU General Public License v2 or later
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -107,6 +107,13 @@ settings_fields('wp_h_data_protection_option_group');
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
         );
+        // Kommentare, WP H-Guestbook - Cookie-Checkbox entfernen
+        add_settings_field('checkbox_1_0_2', // id
+            'Kommmentare' . $wphdp_option_1_guestbook . '<br>(Cookie-Checkbox entfernen)', // title
+            array($this, 'checkbox_1_0_2_callback'), // callback
+            'wp-h-data-protection-admin', // page
+            'wp_h_data_protection_setting_section' // section
+        );
         // Plugin WP Cerber
         if (is_plugin_active('wp-cerber/wp-cerber.php')) {
             // Plugin ist aktiv
@@ -183,6 +190,10 @@ settings_fields('wp_h_data_protection_option_group');
         if (isset($input['checkbox_1_0_1'])) {
             $sanitary_values['checkbox_1_0_1'] = $input['checkbox_1_0_1'];
         }
+        // Kommentare, WP H-Guestbook - Cookie-Checkbox entfernen
+        if (isset($input['checkbox_1_0_2'])) {
+            $sanitary_values['checkbox_1_0_2'] = $input['checkbox_1_0_2'];
+        }
         // Plugin WP Cerber
         if (isset($input['checkbox_2_1'])) {
             $sanitary_values['checkbox_2_1'] = $input['checkbox_2_1'];
@@ -224,6 +235,10 @@ settings_fields('wp_h_data_protection_option_group');
     // Kommentare, WP H-Guestbook - Zustimmung zur Datenverarbeitung
     public function checkbox_1_0_1_callback() {
             printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0_1]" id="checkbox_1_0_1" value="checkbox_1_0_1" %s> <label for="checkbox_1_0_1">Aktiviert den Privacy-Check (Empfohlen)</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0_1']) && $this->wp_h_data_protection_options['checkbox_1_0_1'] === 'checkbox_1_0_1') ? 'checked' : '');
+    }
+    // Kommentare, WP H-Guestbook - Cookie-Checkbox entfernen
+    public function checkbox_1_0_2_callback() {
+            printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0_2]" id="checkbox_1_0_2" value="checkbox_1_0_2" %s> <label for="checkbox_1_0_2">Entfernt die Cookie-Checkbox</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0_2']) && $this->wp_h_data_protection_options['checkbox_1_0_2'] === 'checkbox_1_0_2') ? 'checked' : '');
     }
     // Plugin WP Cerber
     public function checkbox_2_1_callback() {
@@ -284,6 +299,10 @@ if (isset($wp_h_data_protection_options['checkbox_1_0'])) { // Wenn aktiviert, l
 // Kommentare, WP H-Guestbook - Zustimmung zur Datenverarbeitung
 if (isset($wp_h_data_protection_options['checkbox_1_0_1'])) { // Wenn aktiviert, lade Script
     require_once 'inc/wphdp_privacy_checkbox.php';
+}
+// Kommentare, WP H-Guestbook - Cookie-Checkbox entfernen
+if (isset($wp_h_data_protection_options['checkbox_1_0_2'])) { // Wenn aktiviert, lade Script
+    require_once 'inc/wphdp_comment_form_remove_cookie_checkbox.php';
 }
 // Plugin WP Cerber
 if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, lade Script
