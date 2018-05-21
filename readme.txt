@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.3.3.1
+1. Kommentarformular: Admin kann nun wieder im Dashboard antworten
+
 Version 1.3.3
 1. Kommentarformular, WP H-Guestbook (ab WP 4.9.6): Cookie-Checkbox abschaltbar
 
