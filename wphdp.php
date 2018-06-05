@@ -5,8 +5,8 @@ Plugin URI:    https://github.com/m266/wp-h-data-protection
 Description:   Datenschutz f&uuml;r WordPress
 Author:        Hans M. Herbrand
 Author URI:    https://www.web266.de
-Version:       1.3.3.1
-Date:          2018-05-22
+Version:       1.3.4
+Date:          2018-06-05
 License:       GNU General Public License v2 or later
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -321,9 +321,10 @@ if (isset($wp_h_data_protection_options['checkbox_3_2'])) { // Wenn aktiviert, l
     // Alte Daten aus der Tracking Statistik entfernen
     $wphdp_table_name = $wpdb->prefix . "wysija_email_user_stat";
     $wpdb->query("TRUNCATE TABLE $wphdp_table_name");
-    // Newsletter Unsubscribe
-    require_once 'inc/wphdp_nl_unsubscribe.php';
 }
+// Newsletter Unsubscribe
+    require_once 'inc/wphdp_nl_unsubscribe.php';
+
 // Website-URL
 if (isset($wp_h_data_protection_options['checkbox_4_3'])) { // Wenn aktiviert, lade Script
     require_once 'inc/wphdp_site_url.php';

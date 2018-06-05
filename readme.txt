@@ -14,6 +14,10 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.3.4
+1. E-Mail-Adresse zur Newsletter-Abmeldung: Anpassung fuer MailPoet 3
+
+
 Version 1.3.3.1
 1. Kommentarformular: Admin kann nun wieder im Dashboard antworten
 
