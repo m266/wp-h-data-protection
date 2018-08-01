@@ -5,8 +5,8 @@ Plugin URI:    https://github.com/m266/wp-h-data-protection
 Description:   Datenschutz f&uuml;r WordPress
 Author:        Hans M. Herbrand
 Author URI:    https://www.web266.de
-Version:       1.3.4
-Date:          2018-06-05
+Version:       1.3.5
+Date:          2018-08-01
 License:       GNU General Public License v2 or later
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -14,6 +14,14 @@ License URI:   http://www.gnu.org/licenses/gpl-2.0.html
 defined('ABSPATH') || exit();
 // Variablen deklarieren
 global $wpdb;
+// Makes sure the plugin is defined before trying to use it
+if ( ! function_exists('is_plugin_active')) {
+    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+}
+// Makes sure the plugin is defined before trying to use it
+if ( ! function_exists('is_plugin_inactive')) {
+    require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+}
 /* Plugin-Updater */
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker('https://github.com/m266/wp-h-data-protection', __FILE__, 'wp-h-data-protection');
@@ -305,6 +313,8 @@ if (isset($wp_h_data_protection_options['checkbox_1_0_2'])) { // Wenn aktiviert,
     require_once 'inc/wphdp_comment_form_remove_cookie_checkbox.php';
 }
 // Plugin WP Cerber
+if (is_plugin_active('wp-cerber/wp-cerber.php')) {
+    // Plugin ist aktiv
 if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, lade Script
     // Tabelle cerber_traffic
     $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(3)'); // Spaltenbreite 3 Zeichen
@@ -314,13 +324,17 @@ if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, l
     $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(39)'); // Spaltenbreite Original
     $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(20)'); // Spaltenbreite Original
 }
+}
 ;
 // Plugin "MailPoet 2"
+if (is_plugin_active('wysija-newsletters/index.php') and is_plugin_inactive('mailpoet-remove-tracking/mailpoet-remove-tracking.php')) {
+    // Plugin "MailPoet 2" ist aktiv oder Plugin "MailPoet Remove tracking" ist inaktiv
 if (isset($wp_h_data_protection_options['checkbox_3_2'])) { // Wenn aktiviert, lade Script
     require_once 'inc/wphdp_mailpoet2_tracking_deaktivieren.php';
     // Alte Daten aus der Tracking Statistik entfernen
     $wphdp_table_name = $wpdb->prefix . "wysija_email_user_stat";
     $wpdb->query("TRUNCATE TABLE $wphdp_table_name");
+}
 }
 // Newsletter Unsubscribe
     require_once 'inc/wphdp_nl_unsubscribe.php';

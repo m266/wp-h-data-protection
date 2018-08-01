@@ -1,6 +1,6 @@
 === Beispiel-Plugin mit Untermenue ===
 Requires at least: 4.0
-Tested up to: 4.9.6
+Tested up to: 4.9.7
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,10 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.3.5
+1. Performance verbessert, wenn WP Cerber und MailPoet 2 inaktiv sind
+2. Update-Checker aktualisiert
+
 Version 1.3.4
 1. E-Mail-Adresse zur Newsletter-Abmeldung: Anpassung fuer MailPoet 3
 
