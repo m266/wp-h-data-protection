@@ -1,4 +1,4 @@
-=== Beispiel-Plugin mit Untermenue ===
+=== WP H-Data Protection ===
 Requires at least: 4.0
 Tested up to: 4.9.8
 License: GNU General Public License v2 or later
@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.3.7
+1. Schreibfehler in readme.txt beseitigt
+
 Version 1.3.6
 1. Getestet bis 4.9.8
 2. Neuer Updater von Andy Fragen
