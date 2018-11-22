@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.4.0
+1. Zeit abfragen. DB-Änderung zur vollen Stunde ausführen (verbessert die Performance)
+
 Version 1.3.8
 1. Option zum Deaktivieren der Cookie-Checkbox bei Kommentaren und dem Plugin "WP H-Guestbook" entfernt (Seit WordPress 4.9.8 im Dashboard enthalten).
 

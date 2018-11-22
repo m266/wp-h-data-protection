@@ -5,8 +5,8 @@ Plugin URI:    https://github.com/m266/wp-h-data-protection
 Description:   Datenschutz f&uuml;r WordPress
 Author:        Hans M. Herbrand
 Author URI:    https://www.web266.de
-Version:       1.3.8
-Date:          2018-11-19
+Version:       1.4.0
+Date:          2018-11-22
 License:       GNU General Public License v2 or later
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -211,7 +211,7 @@ settings_fields('wp_h_data_protection_option_group');
         if (isset($input['checkbox_1_0_1'])) {
             $sanitary_values['checkbox_1_0_1'] = $input['checkbox_1_0_1'];
         }
-         // Plugin WP Cerber
+        // Plugin WP Cerber
         if (isset($input['checkbox_2_1'])) {
             $sanitary_values['checkbox_2_1'] = $input['checkbox_2_1'];
         }
@@ -314,16 +314,20 @@ if (isset($wp_h_data_protection_options['checkbox_1_0_1'])) { // Wenn aktiviert,
     require_once 'inc/wphdp_privacy_checkbox.php';
 }
 // Plugin WP Cerber
-if (is_plugin_active('wp-cerber/wp-cerber.php')) {
-    // Plugin ist aktiv
-    if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, lade Script
-        // Tabelle cerber_traffic
-        $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(3)'); // Spaltenbreite 3 Zeichen
-        $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(3)'); // Spaltenbreite 3 Zeichen
-    } else { // Wenn inaktiv, stelle Spaltenbreit Original her
-        // Tabelle cerber_traffic
-        $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(39)'); // Spaltenbreite Original
-        $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(20)'); // Spaltenbreite Original
+// Zeit abfragen. DB-Änderung zur vollen Stunde ausführen
+$wphdp_time = date("i");
+if ($wphdp_time == "00") {
+    if (is_plugin_active('wp-cerber/wp-cerber.php')) {
+        // Plugin ist aktiv
+        if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, lade Script
+            // Tabelle cerber_traffic
+            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(3)'); // Spaltenbreite 3 Zeichen
+            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(3)'); // Spaltenbreite 3 Zeichen
+        } else { // Wenn inaktiv, stelle Spaltenbreit Original her
+            // Tabelle cerber_traffic
+            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(39)'); // Spaltenbreite Original
+            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(20)'); // Spaltenbreite Original
+        }
     }
 }
 ;
