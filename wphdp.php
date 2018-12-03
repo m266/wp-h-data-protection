@@ -5,8 +5,8 @@ Plugin URI:    https://github.com/m266/wp-h-data-protection
 Description:   Datenschutz f&uuml;r WordPress
 Author:        Hans M. Herbrand
 Author URI:    https://www.web266.de
-Version:       1.4.0
-Date:          2018-11-22
+Version:       1.4.1
+Date:          2018-12-03
 License:       GNU General Public License v2 or later
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -162,9 +162,9 @@ settings_fields('wp_h_data_protection_option_group');
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
         );
-        // Nachfolgende Optionen nur bei SBR-Theme anzeigen
+        // Nachfolgende Optionen nur bei SBR-Theme (SBR bzw. SBR-Theme) anzeigen
         $wphdp_theme_sbr_activ = wp_get_theme(); // SBR-Theme aktiv?
-        if ('SBR' == $wphdp_theme_sbr_activ->name) {
+        if ($wphdp_theme_sbr_activ == 'SBR' or $wphdp_theme_sbr_activ == 'SBR-Theme') {
             // Website-URL
             add_settings_field('checkbox_4_3', // id
                 'Website-URL', // title
