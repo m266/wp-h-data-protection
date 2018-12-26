@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 4.9.8
+Tested up to: 5.0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
