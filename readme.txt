@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.4.3
+1. E-Mail-Adresse zur Newsletter-Abmeldung: Syntax der E-Mail-Adresse und Verfuegbarkeit der Domain checken
+
 Version 1.4.2
 1. Getestet bis 5.0.2
 
