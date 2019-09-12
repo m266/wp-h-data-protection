@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 5.0.2
+Tested up to: 5.2.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.4.4
+1. Entfernt optional das Feld "Website" aus den Kommentaren und, wenn vorhanden, aus WP H-Guestbook
+
 Version 1.4.3
 1. E-Mail-Adresse zur Newsletter-Abmeldung: Syntax der E-Mail-Adresse und Verfuegbarkeit der Domain checken
 
