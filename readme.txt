@@ -14,6 +14,10 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.4.5
+1. Eingabe der E-Mail-Adresse zur Newsletter-Abmeldung wird auf G&uuml;ltigkeit gepr&uuml;ft.
+2. Breite des E-Mail-Feldes angepasst
+
 Version 1.4.4
 1. Entfernt optional das Feld "Website" aus den Kommentaren und, wenn vorhanden, aus WP H-Guestbook
 

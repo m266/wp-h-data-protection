@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.4.4
-Date:              2019-09-12
+Version:           1.4.5
+Date:              2019-09-18
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -278,7 +278,7 @@ settings_fields('wp_h_data_protection_option_group');
     // E-Mail-Adresse zur Newsletter-Abmeldung
     public function textbox_1_callback() {
         printf(
-            '<input class="regular-text" type="text" name="wp_h_data_protection_option_name[textbox_1]" id="textbox_1" value="%s"> <label for="textbox_1">E-Mail-Adresse eingeben <br> <strong>(Nur wenn ein Newsletter-Tool vorhanden ist!) </strong></label>',
+            '<input class="regular-text" type="email" style="width: 23em;" name="wp_h_data_protection_option_name[textbox_1]" id="textbox_1" value="%s"> <label for="textbox_1">E-Mail-Adresse eingeben <br> <strong>(Nur wenn ein Newsletter-Tool vorhanden ist!) </strong></label>',
             isset($this->wp_h_data_protection_options['textbox_1']) ? esc_attr($this->wp_h_data_protection_options['textbox_1']) : ''
         );
     }
@@ -359,9 +359,6 @@ if (is_plugin_active('wysija-newsletters/index.php') and is_plugin_inactive('mai
         $wpdb->query("TRUNCATE TABLE $wphdp_table_name");
     }
 }
-// Newsletter Unsubscribe
-require_once 'inc/wphdp_nl_unsubscribe.php';
-
 // Website-URL
 if (isset($wp_h_data_protection_options['checkbox_4_3'])) { // Wenn aktiviert, lade Script
     require_once 'inc/wphdp_site_url.php';
