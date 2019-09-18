@@ -5,7 +5,7 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.4.5
+Version:           1.5
 Date:              2019-09-18
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -161,16 +161,16 @@ settings_fields('wp_h_data_protection_option_group');
                 'wp_h_data_protection_setting_section' // section
             );
         }
-        // E-Mail-Adresse zur Newsletter-Abmeldung
-        add_settings_field('textbox_1', // id
+		// Nachfolgende Optionen nur bei SBR-Theme (SBR bzw. SBR-Theme) anzeigen
+        $wphdp_theme_sbr_activ = wp_get_theme(); // SBR-Theme aktiv?
+        if ($wphdp_theme_sbr_activ == 'SBR' or $wphdp_theme_sbr_activ == 'SBR-Theme') {
+            // E-Mail-Adresse zur Newsletter-Abmeldung
+            add_settings_field('textbox_1', // id
             'E-Mail-Adresse zur Newsletter-Abmeldung', // title
             array($this, 'textbox_1_callback'), // callback
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
-        );
-        // Nachfolgende Optionen nur bei SBR-Theme (SBR bzw. SBR-Theme) anzeigen
-        $wphdp_theme_sbr_activ = wp_get_theme(); // SBR-Theme aktiv?
-        if ($wphdp_theme_sbr_activ == 'SBR' or $wphdp_theme_sbr_activ == 'SBR-Theme') {
+            );
             // Website-URL
             add_settings_field('checkbox_4_3', // id
                 'Website-URL', // title
@@ -359,6 +359,17 @@ if (is_plugin_active('wysija-newsletters/index.php') and is_plugin_inactive('mai
         $wpdb->query("TRUNCATE TABLE $wphdp_table_name");
     }
 }
+// Newsletter Unsubscribe
+if (!empty($wp_h_data_protection_options['textbox_1'])) {
+$wphdp_mail = $wp_h_data_protection_options['textbox_1']; // E-Mail-Adresse auslesen
+    function wphdp_nl_unsubscribe_function() {
+        global $wphdp_mail;
+        $wphdp_mailto = "mailto:" . $wphdp_mail;
+        $wphdp_kontakt_mail = "<a href='$wphdp_mailto'>$wphdp_mail</a>";
+        return $wphdp_kontakt_mail;
+    }
+    add_shortcode('wphdp_nl_unsubscribe', 'wphdp_nl_unsubscribe_function');
+}	
 // Website-URL
 if (isset($wp_h_data_protection_options['checkbox_4_3'])) { // Wenn aktiviert, lade Script
     require_once 'inc/wphdp_site_url.php';

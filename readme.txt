@@ -14,8 +14,12 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.5
+1. Codefehler beseitigt
+2. Option zur Newsletter-Abmeldung ist nur noch für SBR-Themes aktiv
+
 Version 1.4.5
-1. Eingabe der E-Mail-Adresse zur Newsletter-Abmeldung wird auf G&uuml;ltigkeit gepr&uuml;ft.
+1. Eingabe der E-Mail-Adresse zur Newsletter-Abmeldung wird auf G&uuml;ltigkeit gepr&uuml;ft
 2. Breite des E-Mail-Feldes angepasst
 
 Version 1.4.4
