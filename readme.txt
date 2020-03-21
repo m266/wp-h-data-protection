@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 5.2.3
+Tested up to: 5.3.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.5.1
+1. Option "Plugin MailPoet 2" entfernt
+
 Version 1.5
 1. Codefehler beseitigt
 2. Option zur Newsletter-Abmeldung ist nur noch für SBR-Themes aktiv

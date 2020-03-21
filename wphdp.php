@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.5
-Date:              2019-09-18
+Version:           1.5.1
+Date:              2020-03-21
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -151,16 +151,6 @@ settings_fields('wp_h_data_protection_option_group');
                 'wp_h_data_protection_setting_section' // section
             );
         }
-        // Plugin "MailPoet 2"
-        if (is_plugin_active('wysija-newsletters/index.php') and is_plugin_inactive('mailpoet-remove-tracking/mailpoet-remove-tracking.php')) {
-            // Plugin "MailPoet 2" ist aktiv oder Plugin "MailPoet Remove tracking" ist inaktiv
-            add_settings_field('checkbox_3_2', // id
-                'Plugin MailPoet 2', // title
-                array($this, 'checkbox_3_2_callback'), // callback
-                'wp-h-data-protection-admin', // page
-                'wp_h_data_protection_setting_section' // section
-            );
-        }
 		// Nachfolgende Optionen nur bei SBR-Theme (SBR bzw. SBR-Theme) anzeigen
         $wphdp_theme_sbr_activ = wp_get_theme(); // SBR-Theme aktiv?
         if ($wphdp_theme_sbr_activ == 'SBR' or $wphdp_theme_sbr_activ == 'SBR-Theme') {
@@ -225,10 +215,6 @@ settings_fields('wp_h_data_protection_option_group');
         if (isset($input['checkbox_2_1'])) {
             $sanitary_values['checkbox_2_1'] = $input['checkbox_2_1'];
         }
-        // Plugin "MailPoet 2"
-        if (isset($input['checkbox_3_2'])) {
-            $sanitary_values['checkbox_3_2'] = $input['checkbox_3_2'];
-        }
         // E-Mail-Adresse zur Newsletter-Abmeldung
         if (isset($input['textbox_1'])) {
             $sanitary_values['textbox_1'] = sanitize_text_field($input['textbox_1']);
@@ -270,10 +256,6 @@ settings_fields('wp_h_data_protection_option_group');
     // Plugin WP Cerber
     public function checkbox_2_1_callback() {
         printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_2_1]" id="checkbox_2_1" value="checkbox_2_1" %s> <label for="checkbox_2_1">Entfernt die IP-Adressen aus dem Traffic Inspector</label>', (isset($this->wp_h_data_protection_options['checkbox_2_1']) && $this->wp_h_data_protection_options['checkbox_2_1'] === 'checkbox_2_1') ? 'checked' : '');
-    }
-    // Plugin "MailPoet 2"
-    public function checkbox_3_2_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_3_2]" id="checkbox_3_2" value="checkbox_3_2" %s> <label for="checkbox_3_2">Deaktiviert das User-Tracking</label>', (isset($this->wp_h_data_protection_options['checkbox_3_2']) && $this->wp_h_data_protection_options['checkbox_3_2'] === 'checkbox_3_2') ? 'checked' : '');
     }
     // E-Mail-Adresse zur Newsletter-Abmeldung
     public function textbox_1_callback() {
@@ -349,16 +331,6 @@ if ($wphdp_time == "00") {
     }
 }
 ;
-// Plugin "MailPoet 2"
-if (is_plugin_active('wysija-newsletters/index.php') and is_plugin_inactive('mailpoet-remove-tracking/mailpoet-remove-tracking.php')) {
-    // Plugin "MailPoet 2" ist aktiv oder Plugin "MailPoet Remove tracking" ist inaktiv
-    if (isset($wp_h_data_protection_options['checkbox_3_2'])) { // Wenn aktiviert, lade Script
-        require_once 'inc/wphdp_mailpoet2_tracking_deaktivieren.php';
-        // Alte Daten aus der Tracking Statistik entfernen
-        $wphdp_table_name = $wpdb->prefix . "wysija_email_user_stat";
-        $wpdb->query("TRUNCATE TABLE $wphdp_table_name");
-    }
-}
 // Newsletter Unsubscribe
 if (!empty($wp_h_data_protection_options['textbox_1'])) {
 $wphdp_mail = $wp_h_data_protection_options['textbox_1']; // E-Mail-Adresse auslesen
