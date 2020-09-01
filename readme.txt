@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 5.3.2
+Tested up to: 5.5
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.6
+1. Option "Entfernt das Feld "Website" aus den Kommentaren und, wenn aktiviert, aus den genannten Plugins" neu programmiert
+
 Version 1.5.1
 1. Option "Plugin MailPoet 2" entfernt
 
