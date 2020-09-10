@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 5.5
+Tested up to: 5.5.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,10 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.7
+1. Option "Feld "Website entfernen" neu programmiert
+2. Optionen für SBR-Websites entfernt
+
 Version 1.6
 1. Option "Entfernt das Feld "Website" aus den Kommentaren und, wenn aktiviert, aus den genannten Plugins" neu programmiert
 

@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.6
-Date:              2020-09-01
+Version:           1.7
+Date:              2020-09-11
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -151,48 +151,6 @@ settings_fields('wp_h_data_protection_option_group');
                 'wp_h_data_protection_setting_section' // section
             );
         }
-		// Nachfolgende Optionen nur bei SBR-Theme (SBR bzw. SBR-Theme) anzeigen
-        $wphdp_theme_sbr_activ = wp_get_theme(); // SBR-Theme aktiv?
-        if ($wphdp_theme_sbr_activ == 'SBR' or $wphdp_theme_sbr_activ == 'SBR-Theme') {
-            // E-Mail-Adresse zur Newsletter-Abmeldung
-            add_settings_field('textbox_1', // id
-            'E-Mail-Adresse zur Newsletter-Abmeldung', // title
-            array($this, 'textbox_1_callback'), // callback
-            'wp-h-data-protection-admin', // page
-            'wp_h_data_protection_setting_section' // section
-            );
-            // Website-URL
-            add_settings_field('checkbox_4_3', // id
-                'Website-URL', // title
-                array($this, 'checkbox_4_3_callback'), // callback
-                'wp-h-data-protection-admin', // page
-                'wp_h_data_protection_setting_section' // section
-            );
-            // Link zum Kontaktformular
-            add_settings_field('checkbox_5_4', // id
-                'Link zum Kontaktformular', // title
-                array($this, 'checkbox_5_4_callback'), // callback
-                'wp-h-data-protection-admin', // page
-                'wp_h_data_protection_setting_section' // section
-            );
-            // Link zum Anmeldeformular
-            add_settings_field('checkbox_6_5', // id
-                'Link zum Anmeldeformular', // title
-                array($this, 'checkbox_6_5_callback'), // callback
-                'wp-h-data-protection-admin', // page
-                'wp_h_data_protection_setting_section' // section
-            );
-            // Link zum G&auml;stebuch
-            if (is_plugin_active('wp-h-guestbook/wphgb.php')) {
-                // Plugin ist aktiv
-                add_settings_field('checkbox_7_6', // id
-                    'Link zum G&auml;stebuch', // title
-                    array($this, 'checkbox_7_6_callback'), // callback
-                    'wp-h-data-protection-admin', // page
-                    'wp_h_data_protection_setting_section' // section
-                );
-            }
-        }
     }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -215,26 +173,6 @@ settings_fields('wp_h_data_protection_option_group');
         if (isset($input['checkbox_2_1'])) {
             $sanitary_values['checkbox_2_1'] = $input['checkbox_2_1'];
         }
-        // E-Mail-Adresse zur Newsletter-Abmeldung
-        if (isset($input['textbox_1'])) {
-            $sanitary_values['textbox_1'] = sanitize_text_field($input['textbox_1']);
-        }
-        // Website-URL
-        if (isset($input['checkbox_4_3'])) {
-            $sanitary_values['checkbox_4_3'] = $input['checkbox_4_3'];
-        }
-        // Link zum Kontaktformular
-        if (isset($input['checkbox_5_4'])) {
-            $sanitary_values['checkbox_5_4'] = $input['checkbox_5_4'];
-        }
-        // Link zum Anmeldeformular
-        if (isset($input['checkbox_6_5'])) {
-            $sanitary_values['checkbox_6_5'] = $input['checkbox_6_5'];
-        }
-        // Link zum G&auml;stebuch
-        if (isset($input['checkbox_7_6'])) {
-            $sanitary_values['checkbox_7_6'] = $input['checkbox_7_6'];
-        }
         return $sanitary_values;
     }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -256,29 +194,6 @@ settings_fields('wp_h_data_protection_option_group');
     // Plugin WP Cerber
     public function checkbox_2_1_callback() {
         printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_2_1]" id="checkbox_2_1" value="checkbox_2_1" %s> <label for="checkbox_2_1">Entfernt die IP-Adressen aus dem Traffic Inspector</label>', (isset($this->wp_h_data_protection_options['checkbox_2_1']) && $this->wp_h_data_protection_options['checkbox_2_1'] === 'checkbox_2_1') ? 'checked' : '');
-    }
-    // E-Mail-Adresse zur Newsletter-Abmeldung
-    public function textbox_1_callback() {
-        printf(
-            '<input class="regular-text" type="email" style="width: 23em;" name="wp_h_data_protection_option_name[textbox_1]" id="textbox_1" value="%s"> <label for="textbox_1">E-Mail-Adresse eingeben <br> <strong>(Nur wenn ein Newsletter-Tool vorhanden ist!) </strong></label>',
-            isset($this->wp_h_data_protection_options['textbox_1']) ? esc_attr($this->wp_h_data_protection_options['textbox_1']) : ''
-        );
-    }
-    // Website-URL
-    public function checkbox_4_3_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_4_3]" id="checkbox_4_3" value="checkbox_4_3" %s> <label for="checkbox_4_3">F&uuml;gt die Website-URL im Datenschutz-Hinweis ein</label>', (isset($this->wp_h_data_protection_options['checkbox_4_3']) && $this->wp_h_data_protection_options['checkbox_4_3'] === 'checkbox_4_3') ? 'checked' : '');
-    }
-    // Link zum Kontaktformular
-    public function checkbox_5_4_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_5_4]" id="checkbox_5_4" value="checkbox_5_4" %s> <label for="checkbox_5_4">F&uuml;gt den Link zum Kontakt-Formular ein</label>', (isset($this->wp_h_data_protection_options['checkbox_5_4']) && $this->wp_h_data_protection_options['checkbox_5_4'] === 'checkbox_5_4') ? 'checked' : '');
-    }
-    // Link zum Anmeldeformular
-    public function checkbox_6_5_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_6_5]" id="checkbox_6_5" value="checkbox_6_5" %s> <label for="checkbox_6_5">F&uuml;gt den Link zum Anmelde-Formular ein</label>', (isset($this->wp_h_data_protection_options['checkbox_6_5']) && $this->wp_h_data_protection_options['checkbox_6_5'] === 'checkbox_6_5') ? 'checked' : '');
-    }
-    // Link zum G&auml;stebuch
-    public function checkbox_7_6_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_7_6]" id="checkbox_7_6" value="checkbox_7_6" %s> <label for="checkbox_7_6">F&uuml;gt den Link zum G&auml;stebuch ein</label>', (isset($this->wp_h_data_protection_options['checkbox_7_6']) && $this->wp_h_data_protection_options['checkbox_7_6'] === 'checkbox_7_6') ? 'checked' : '');
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -331,32 +246,5 @@ if ($wphdp_time == "00") {
     }
 }
 ;
-// Newsletter Unsubscribe
-if (!empty($wp_h_data_protection_options['textbox_1'])) {
-$wphdp_mail = $wp_h_data_protection_options['textbox_1']; // E-Mail-Adresse auslesen
-    function wphdp_nl_unsubscribe_function() {
-        global $wphdp_mail;
-        $wphdp_mailto = "mailto:" . $wphdp_mail;
-        $wphdp_kontakt_mail = "<a href='$wphdp_mailto'>$wphdp_mail</a>";
-        return $wphdp_kontakt_mail;
-    }
-    add_shortcode('wphdp_nl_unsubscribe', 'wphdp_nl_unsubscribe_function');
-}	
-// Website-URL
-if (isset($wp_h_data_protection_options['checkbox_4_3'])) { // Wenn aktiviert, lade Script
-    require_once 'inc/wphdp_site_url.php';
-}
-// Link zum Kontaktformular
-if (isset($wp_h_data_protection_options['checkbox_5_4'])) { // Wenn aktiviert, lade Script
-    require_once 'inc/wphdp_kontakt_form.php';
-}
-// Link zum Anmeldeformular
-if (isset($wp_h_data_protection_options['checkbox_6_5'])) { // Wenn aktiviert, lade Script
-    require_once 'inc/wphdp_anmelde_form.php';
-}
-// Link zum G&auml;stebuch
-if (isset($wp_h_data_protection_options['checkbox_7_6'])) { // Wenn aktiviert, lade Script
-    require_once 'inc/wphdp_guestbook.php';
-}
 ; //////////////////////////////////////////////////////////////////////////////////////////
 ?>

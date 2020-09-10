@@ -1,4 +1,0 @@
-/* Feld "Website" aus Kommentar-Formular und optional Gästebuch "WP H-Guestbook" entfernen */
-#commentform .comment-form-url {
-  display: none;
-}
