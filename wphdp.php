@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.7
-Date:              2020-09-11
+Version:           1.7.1
+Date:              2020-10-04
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -229,7 +229,7 @@ if (isset($wp_h_data_protection_options['checkbox_1_0_2'])) { // Wenn aktiviert,
     require_once 'inc/wphdp_remove_url_kommentar_guestbook.php';
 }
 // Plugin WP Cerber
-// Zeit abfragen. DB-Änderung zur vollen Stunde ausführen
+// Zeit abfragen. DB-Ã„nderung zur vollen Stunde ausfÃ¼hren
 $wphdp_time = date("i");
 if ($wphdp_time == "00") {
     if (is_plugin_active('wp-cerber/wp-cerber.php')) {

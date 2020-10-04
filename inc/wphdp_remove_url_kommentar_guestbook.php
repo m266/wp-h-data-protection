@@ -1,14 +1,8 @@
 <?php
 // Feld "Website" aus Kommentar-Formular und optional Gästebuch "WP H-Guestbook" entfernen
-function remove_url_comment_guestbook()
-{
-?>
-<style>
-#commentform .comment-form-url {
-    display: none;
+function remove_comment_fields($fields) {
+unset($fields['url']);
+return $fields;
 }
-</style>
-<?php
-}
-add_action('wp_enqueue_scripts', 'remove_url_comment_guestbook');
+add_filter('comment_form_default_fields', 'remove_comment_fields');
 ?>

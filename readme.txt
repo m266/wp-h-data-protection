@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.7.1
+1. Option "Feld "Website entfernen" aufgrund Spams u&uml,berarbeitet
+
 Version 1.7
 1. Option "Feld "Website entfernen" neu programmiert
 2. Optionen für SBR-Websites entfernt
