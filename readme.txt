@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 5.5.1
+Tested up to: 5.6
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,8 +14,11 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.7.2
+1. Tested up to: 5.6
+
 Version 1.7.1
-1. Option "Feld "Website entfernen" aufgrund Spams u&uml,berarbeitet
+1. Option "Feld "Website entfernen" aufgrund Spams ueberarbeitet
 
 Version 1.7
 1. Option "Feld "Website entfernen" neu programmiert
