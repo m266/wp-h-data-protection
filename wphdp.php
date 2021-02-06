@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.7.2
-Date:              2021-01-02
+Version:           1.8
+Date:              2021-02-06
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -14,38 +14,6 @@ GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
 // Externer Zugriff verhindern
 defined('ABSPATH') || exit();
 global $wpdb;
-// Makes sure the plugin is defined before trying to use it
-if (!function_exists('is_plugin_active')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-// Makes sure the plugin is defined before trying to use it
-if (!function_exists('is_plugin_inactive')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-// GitHub-Updater aktiv?
-// Makes sure the plugin is defined before trying to use it
-if (!function_exists('is_plugin_active')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-// Makes sure the plugin is defined before trying to use it
-if (!function_exists('is_plugin_inactive')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-// GitHub-Updater inaktiv?
-if (is_plugin_inactive('github-updater/github-updater.php')) {
-    // Plugin ist inaktiv
-    // Plugin-Name im Meldungstext anpassen
-    function wphdp_missing_github_updater_notice() {; // GitHub-Updater fehlt
-        ?>
-    <div class="error notice">  <!-- Wenn ja, Meldung ausgeben -->
-        <p><?php _e('Bitte das Plugin <a href="https://www.web266.de/tutorials/github/github-updater/" target="_blank">
-        <b>"GitHub-Updater"</b></a> herunterladen, installieren und aktivieren.
-        Ansonsten werden keine weiteren Updates f&uuml;r das Plugin <b>"WP H-Data Protection"</b> bereit gestellt!');?></p>
-    </div>
-                        <?php
-}
-    add_action('admin_notices', 'wphdp_missing_github_updater_notice');
-}
 class WPHDataProtection {
     private $wp_h_data_protection_options;
     public function __construct() {
@@ -82,8 +50,19 @@ class WPHDataProtection {
         ?>
 </h2>
 <div class="card">
-        <h3><b>(Das Plugin ist auf <a href="https://www.web266.de/software/eigene-plugins/wp-h-data-protection/" target="_blank">web266.de</a> detailliert beschrieben)</b></h3>
-            <hr>
+
+<?php
+// GitHub-Updater inaktiv?
+        if (!function_exists('is_plugin_inactive')) {
+            require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
+        if (is_plugin_inactive('github-updater/github-updater.php')) {
+            ?>
+<div class="notice notice-error"><p>Bitte das Plugin <a href="https://www.web266.de/tutorials/github/github-updater/" target="_blank"><b>"GitHub-Updater"</b></a> herunterladen, installieren und aktivieren, um weiterhin Updates zu erhalten!</p></div>
+<?php
+}
+        ?>
+
             <?php settings_errors();?>
             <form method="post" action="options.php">
                                         <?php
