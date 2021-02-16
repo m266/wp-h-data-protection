@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 1.8.1
+1. Uncaught Error: Call to undefined function is_plugin_active() in Zeile 214 beseitigt
+
 Version 1.8
 1. Code verbessert
 2. Tested up to: 5.6.1

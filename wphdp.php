@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.8
-Date:              2021-02-06
+Version:           1.8.1
+Date:              2021-02-11
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -119,7 +119,7 @@ settings_fields('wp_h_data_protection_option_group');
             array($this, 'checkbox_1_0_2_callback'), // callback
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
-        );		
+        );
         // Plugin WP Cerber
         if (is_plugin_active('wp-cerber/wp-cerber.php')) {
             // Plugin ist aktiv
@@ -147,7 +147,7 @@ settings_fields('wp_h_data_protection_option_group');
         // Kommentare, WP H-Guestbook - Entfernt das Feld Website aus dem Formular
         if (isset($input['checkbox_1_0_2'])) {
             $sanitary_values['checkbox_1_0_2'] = $input['checkbox_1_0_2'];
-        }		
+        }
         // Plugin WP Cerber
         if (isset($input['checkbox_2_1'])) {
             $sanitary_values['checkbox_2_1'] = $input['checkbox_2_1'];
@@ -169,7 +169,7 @@ settings_fields('wp_h_data_protection_option_group');
     // Kommentare, WP H-Guestbook - Entfernt das Feld Website aus dem Formular
     public function checkbox_1_0_2_callback() {
         printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0_2]" id="checkbox_1_0_2" value="checkbox_1_0_2" %s> <label for="checkbox_1_0_2">Entfernt das Feld "Website" aus den Kommentaren und, wenn aktiviert, aus den genannten Plugins</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0_2']) && $this->wp_h_data_protection_options['checkbox_1_0_2'] === 'checkbox_1_0_2') ? 'checked' : '');
-    }	
+    }
     // Plugin WP Cerber
     public function checkbox_2_1_callback() {
         printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_2_1]" id="checkbox_2_1" value="checkbox_2_1" %s> <label for="checkbox_2_1">Entfernt die IP-Adressen aus dem Traffic Inspector</label>', (isset($this->wp_h_data_protection_options['checkbox_2_1']) && $this->wp_h_data_protection_options['checkbox_2_1'] === 'checkbox_2_1') ? 'checked' : '');
@@ -211,6 +211,9 @@ if (isset($wp_h_data_protection_options['checkbox_1_0_2'])) { // Wenn aktiviert,
 // Zeit abfragen. DB-Änderung zur vollen Stunde ausführen
 $wphdp_time = date("i");
 if ($wphdp_time == "00") {
+        if (!function_exists('is_plugin_active')) {
+            require_once ABSPATH . '/wp-admin/includes/plugin.php';
+        }
     if (is_plugin_active('wp-cerber/wp-cerber.php')) {
         // Plugin ist aktiv
         if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, lade Script
