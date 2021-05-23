@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://www.web266.de
-Version:           1.9
-Date:              2021-03-15
+Version:           2.0
+Date:              2021-05-23
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -15,20 +15,15 @@ GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
 defined('ABSPATH') || exit();
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// Check GitHub Updater aktiv
-// Anpassungen Plugin-Name und Funktions-Name vornehmen
-if (!function_exists('is_plugin_inactive')) {
-    require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-if (is_plugin_inactive('github-updater/github-updater.php')) {
-// E-Mail an Admin senden, wenn inaktiv
+
+// Erinnerung an Git Updater  
 register_activation_hook( __FILE__, 'wphdp_activate' ); // Funktions-Name anpassen
 function wphdp_activate() { // Funktions-Name anpassen
 $to = get_option('admin_email');
 $subject = 'Plugin "WP H-Data Protection"'; // Plugin-Name anpassen
-$message = 'Bitte das Plugin "GitHub Updater" hier https://web266.de/tutorials/github/github-updater/ herunterladen, installieren und aktivieren, um weiterhin Updates zu erhalten!';
+$message = 'Falls nicht vorhanden:
+Bitte das Plugin "Git Updater" hier https://herbrand.org/tutorials/github/git-updater/ herunterladen, installieren und aktivieren, um weiterhin Updates zu erhalten!';
 wp_mail($to, $subject, $message );
-}
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
