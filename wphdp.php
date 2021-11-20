@@ -4,9 +4,9 @@ Plugin Name:       WP H-Data Protection
 Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
-Author URI:        https://www.web266.de
-Version:           2.0
-Date:              2021-05-23
+Author URI:        https://herbrand.org
+Version:           2.1
+Date:              2021-11-20
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -228,6 +228,23 @@ if ($wphdp_time == "00") {
         }
     }
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Abfrage der WordPress-Benutzer verhindern (User Enumeration)
+// Quelle: https://kulturbanause.de/blog/wordpress-user-enumeration-verhindern/
+if ( ! is_admin() && isset($_SERVER['REQUEST_URI'])){
+ if(preg_match('/(wp-comments-post)/', $_SERVER['REQUEST_URI']) === 0 && !empty($_REQUEST['author']) ) {
+ wp_die('Diese Abfrage ist nicht erlaubt!');
+ }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Login-Fehlermeldung deaktivieren
+// Quelle: https://www.wpbeginner.com/wp-tutorials/how-to-disable-login-hints-in-wordpress-login-error-messages/
+function no_wordpress_errors(){
+    return 'Fehler!';
+}
+add_filter( 'login_errors', 'no_wordpress_errors' );
 ;
-; //////////////////////////////////////////////////////////////////////////////////////////
+;
 ?>
