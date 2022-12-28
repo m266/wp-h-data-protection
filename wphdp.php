@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://herbrand.org
-Version:           2.1
-Date:              2021-11-20
+Version:           2.1.1
+Date:              2022-12-28
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection

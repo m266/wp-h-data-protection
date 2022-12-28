@@ -1,6 +1,6 @@
 === WP H-Data Protection ===
 Requires at least: 4.0
-Tested up to: 5.8.2
+Tested up to: 6.1.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 2.1.1
+1. Getestet mit PHP 8.1 und WordPress 6.1.1
+
 Version 2.1
 1. Abfrage der WordPress-Benutzer verhindern (User Enumeration)
 2. Login-Fehlermeldung deaktivieren
