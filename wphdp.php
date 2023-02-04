@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://herbrand.org
-Version:           2.1.1
-Date:              2022-12-28
+Version:           2.2
+Date:              2023-02-04
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -121,16 +121,6 @@ settings_fields('wp_h_data_protection_option_group');
             'wp-h-data-protection-admin', // page
             'wp_h_data_protection_setting_section' // section
         );
-        // Plugin WP Cerber
-        if (is_plugin_active('wp-cerber/wp-cerber.php')) {
-            // Plugin ist aktiv
-            add_settings_field('checkbox_2_1', // id
-                'Plugin WP Cerber', // title
-                array($this, 'checkbox_2_1_callback'), // callback
-                'wp-h-data-protection-admin', // page
-                'wp_h_data_protection_setting_section' // section
-            );
-        }
     }
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -148,10 +138,6 @@ settings_fields('wp_h_data_protection_option_group');
         // Kommentare, WP H-Guestbook - Entfernt das Feld Website aus dem Formular
         if (isset($input['checkbox_1_0_2'])) {
             $sanitary_values['checkbox_1_0_2'] = $input['checkbox_1_0_2'];
-        }
-        // Plugin WP Cerber
-        if (isset($input['checkbox_2_1'])) {
-            $sanitary_values['checkbox_2_1'] = $input['checkbox_2_1'];
         }
         return $sanitary_values;
     }
@@ -171,10 +157,6 @@ settings_fields('wp_h_data_protection_option_group');
     public function checkbox_1_0_2_callback() {
         printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0_2]" id="checkbox_1_0_2" value="checkbox_1_0_2" %s> <label for="checkbox_1_0_2">Entfernt das Feld "Website" aus den Kommentaren und, wenn aktiviert, aus den genannten Plugins</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0_2']) && $this->wp_h_data_protection_options['checkbox_1_0_2'] === 'checkbox_1_0_2') ? 'checked' : '');
     }
-    // Plugin WP Cerber
-    public function checkbox_2_1_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_2_1]" id="checkbox_2_1" value="checkbox_2_1" %s> <label for="checkbox_2_1">Entfernt die IP-Adressen aus dem Traffic Inspector</label>', (isset($this->wp_h_data_protection_options['checkbox_2_1']) && $this->wp_h_data_protection_options['checkbox_2_1'] === 'checkbox_2_1') ? 'checked' : '');
-    }
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 if (is_admin()) {
@@ -185,7 +167,6 @@ if (is_admin()) {
  * Retrieve this value with:
  * $wp_h_data_protection_options = get_option( 'wp_h_data_protection_option_name' ); // Array of All Options
  * $checkbox_1_0 = $wp_h_data_protection_options['checkbox_1_0']; // Checkbox 1
- * $checkbox_2_1 = $wp_h_data_protection_options['checkbox_2_1']; // Checkbox 2
  * $checkbox_3_2 = $wp_h_data_protection_options['checkbox_3_2']; // Checkbox 3
  * $textbox_1    = $wp_h_data_protection_options['textbox_1'];    // Textbox 1
  */
@@ -207,26 +188,6 @@ if (isset($wp_h_data_protection_options['checkbox_1_0_1'])) { // Wenn aktiviert,
 // Kommentare, WP H-Guestbook - Entfernt das Feld Website aus dem Formular
 if (isset($wp_h_data_protection_options['checkbox_1_0_2'])) { // Wenn aktiviert, lade Script
     require_once 'inc/wphdp_remove_url_kommentar_guestbook.php';
-}
-// Plugin WP Cerber
-// Zeit abfragen. DB-Änderung zur vollen Stunde ausführen
-$wphdp_time = date("i");
-if ($wphdp_time == "00") {
-        if (!function_exists('is_plugin_active')) {
-            require_once ABSPATH . '/wp-admin/includes/plugin.php';
-        }
-    if (is_plugin_active('wp-cerber/wp-cerber.php')) {
-        // Plugin ist aktiv
-        if (isset($wp_h_data_protection_options['checkbox_2_1'])) { // Wenn aktiviert, lade Script
-            // Tabelle cerber_traffic
-            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(3)'); // Spaltenbreite 3 Zeichen
-            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(3)'); // Spaltenbreite 3 Zeichen
-        } else { // Wenn inaktiv, stelle Spaltenbreit Original her
-            // Tabelle cerber_traffic
-            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip VARCHAR(39)'); // Spaltenbreite Original
-            $wpdb->query('ALTER TABLE cerber_traffic MODIFY ip_long VARCHAR(20)'); // Spaltenbreite Original
-        }
-    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

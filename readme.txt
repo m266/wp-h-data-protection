@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 2.2
+1. WP Cerber-Funktion entfernt (Plugin auf dem WordPress-Server deaktiviert)
+
 Version 2.1.1
 1. Getestet mit PHP 8.1 und WordPress 6.1.1
 
