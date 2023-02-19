@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://herbrand.org
-Version:           2.2
-Date:              2023-02-04
+Version:           2.3
+Date:              2023-02-19
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -151,7 +151,7 @@ settings_fields('wp_h_data_protection_option_group');
     }
     // Kommentare, WP H-Guestbook - Zustimmung zur Datenverarbeitung
     public function checkbox_1_0_1_callback() {
-        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0_1]" id="checkbox_1_0_1" value="checkbox_1_0_1" %s> <label for="checkbox_1_0_1">Aktiviert den Privacy-Check (Empfohlen)</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0_1']) && $this->wp_h_data_protection_options['checkbox_1_0_1'] === 'checkbox_1_0_1') ? 'checked' : '');
+        printf('<input type="checkbox" name="wp_h_data_protection_option_name[checkbox_1_0_1]" id="checkbox_1_0_1" value="checkbox_1_0_1" %s> <label for="checkbox_1_0_1">Aktiviert den Privacy-Check und, wenn aktiviert, in den genannten Plugins.<br>Der Link zur Datenschutzerkl&auml;rung funktioniert nur, <a href="options-privacy.php">wenn diese Seite von WordPress selbst verwaltet wird!</a> (Empfohlen)</label>', (isset($this->wp_h_data_protection_options['checkbox_1_0_1']) && $this->wp_h_data_protection_options['checkbox_1_0_1'] === 'checkbox_1_0_1') ? 'checked' : '');
     }
     // Kommentare, WP H-Guestbook - Entfernt das Feld Website aus dem Formular
     public function checkbox_1_0_2_callback() {

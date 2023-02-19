@@ -7,7 +7,7 @@
 //add your checkbox after the comment field
 add_filter('comment_form_field_comment', 'wphdp_comment_form_field_comment');
 function wphdp_comment_form_field_comment($comment_field) {
-    return $comment_field . '<input type="checkbox" name="privacy" value="privacy-key" class="privacyBox" aria-req="true"><p class="pprivacy">Ich stimme der Speicherung und Verarbeitung meiner Daten nach der EU-DSGVO zu und akzeptiere die Datenschutzbedingungen.<p>'; // Fehler bei der Ausgabe
+    return $comment_field . '<input type="checkbox" name="privacy" value="privacy-key" class="privacyBox" aria-req="true"><p class="pprivacy">Ich stimme der Speicherung und Verarbeitung meiner Daten nach der DSGVO zu und akzeptiere die <a href="' . get_privacy_policy_url() . '">Datenschutzbedingungen.</a> *<p>';
 }
 //javascript validation
 add_action('wp_footer', 'valdate_privacy_comment_javascript');
