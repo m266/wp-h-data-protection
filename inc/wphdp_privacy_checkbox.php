@@ -1,12 +1,15 @@
 <?php
 // Quelle: https://wordpress.stackexchange.com/questions/127027/how-to-add-a-privacy-checkbox-in-comment-template
-if (is_admin()) { // Privacy-Checkbox beim Admin nicht anzeigen
-} else { // Privacy-Checkbox im Frontend anzeigen
     //add your checkbox after the comment field
     add_filter('comment_form_field_comment', 'wphdp_comment_form_field_comment');
     function wphdp_comment_form_field_comment($comment_field)
     {
-        return $comment_field . '<input type="checkbox" name="privacy" value="privacy-key" class="privacyBox" aria-req="true"><p class="pprivacy">Ich stimme der Speicherung und Verarbeitung meiner Daten nach der DSGVO zu und akzeptiere die ' . ((!empty($url = get_privacy_policy_url())) ? '<a class="privacy-policy-link" href="' . esc_url($url) . '">Datenschutzbedingungen</a>' : 'Datenschutzbedingungen') . '. *</p>';
+        if (!empty(get_the_privacy_policy_link())) {
+            return $comment_field . '<input type="checkbox" name="privacy" value="privacy-key" class="privacyBox" aria-req="true"><p class="pprivacy">Ich stimme der Speicherung und Verarbeitung meiner Daten nach der DSGVO zu und akzeptiere die ' . ((!empty($url = get_privacy_policy_url())) ? '<a class="privacy-policy-link" href="' . esc_url($url) . '">Datenschutzbedingungen</a>' : 'Datenschutzbedingungen') . '. *</p>';
+        } else {
+            global $wphdp_privacy_link;
+            return $comment_field . '<input type="checkbox" name="privacy" value="privacy-key" class="privacyBox" aria-req="true"><p class="pprivacy">Ich stimme der Speicherung und Verarbeitung meiner Daten nach der DSGVO zu und akzeptiere die <a class="privacy-policy-link" href="' . esc_url(!empty($url = get_privacy_policy_url()) ? $url : $wphdp_privacy_link) . '">Datenschutzbedingungen</a>. *</p>';
+        }
     }
 //javascript validation
     add_action('wp_footer', 'valdate_privacy_comment_javascript');
@@ -39,5 +42,4 @@ if (is_admin()) { // Privacy-Checkbox beim Admin nicht anzeigen
 
         return $commentdata;
     }
-}
 ?>

@@ -5,8 +5,8 @@ Plugin URI:        https://github.com/m266/wp-h-data-protection
 Description:       Datenschutz f&uuml;r WordPress
 Author:            Hans M. Herbrand
 Author URI:        https://herbrand.org
-Version:           2.3.1
-Date:              2023-02-21
+Version:           2.3.2
+Date:              2023-02-23
 License:           GNU General Public License v2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 GitHub Plugin URI: https://github.com/m266/wp-h-data-protection
@@ -22,10 +22,16 @@ function wphdp_activate() { // Funktions-Name anpassen
 $to = get_option('admin_email');
 $subject = 'Plugin "WP H-Data Protection"'; // Plugin-Name anpassen
 $message = 'Falls nicht vorhanden:
-Bitte das Plugin "Git Updater" hier https://herbrand.org/tutorials/github/git-updater/ herunterladen, installieren und aktivieren, um weiterhin Updates zu erhalten!';
+Bitte das Plugin "Git Updater" hier https://herbrand.org/tutorials/github/git-updater/ herunterladen, installieren und aktivieren, um weiterhin Updates zu erhalten!
+
+Bitte beachten:
+Der Link zur Datenschutzerklärung funktioniert nur, wenn diese Seite von WordPress selbst verwaltet wird!
+Die Datenschutzseite wird im Dashboard über Einstellungen -> Datenschutz zugewiesen.
+Falls die Datenschutzseite vom Theme verwaltet oder ein externen Link verwendet wird, bitte das kleine Script von dieser Seite
+https://herbrand.org/wordpress/eigene-plugins/wp-h-data-protection/kommentare-privacy-checkbox/
+in die Datei functions.php oder ein Snippet-Plugin einfügen. Der Link zur Datenschutzseite ist dann einzugeben.';
 wp_mail($to, $subject, $message );
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
 global $wpdb;
