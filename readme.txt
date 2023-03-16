@@ -14,6 +14,9 @@ Datenschutz-Plugin
 3. Configure the plugin in Dashboard -> WP H-Data Protection
 
 == Changelog ==
+Version 2.4
+1. Beantworten von Kommentaren/Gästebucheinträgen im Dashboard wieder möglich
+
 Version 2.3.2
 1. Option zur Verwendung eines externen Links zur Datenschutzerklärung eingefügt
 2. PHP-Code von wphdp_privacy_checkbox.php bereinigt

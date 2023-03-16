@@ -1,5 +1,6 @@
 <?php
-// Quelle: https://wordpress.stackexchange.com/questions/127027/how-to-add-a-privacy-checkbox-in-comment-template
+if (!is_admin()) { // Beantworten im Dashboard wieder möglich
+    // Quelle: https://wordpress.stackexchange.com/questions/127027/how-to-add-a-privacy-checkbox-in-comment-template
     //add your checkbox after the comment field
     add_filter('comment_form_field_comment', 'wphdp_comment_form_field_comment');
     function wphdp_comment_form_field_comment($comment_field)
@@ -42,4 +43,5 @@
 
         return $commentdata;
     }
+}
 ?>
